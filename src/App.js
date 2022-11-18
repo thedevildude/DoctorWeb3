@@ -1,10 +1,17 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
+import Sidebar from './components/Sidebar';
 
 const App = () => {
   return (
-    <div className="App">
-    <h1>Hello</h1>
-    </div>
+    <>
+      <BrowserRouter>
+        <Sidebar />
+        <Routes>
+          <Route path="/" />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
