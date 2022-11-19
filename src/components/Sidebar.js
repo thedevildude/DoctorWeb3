@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { SidebarData } from './SidebarData';
 import './Sidebar.css';
 import { IconContext } from 'react-icons';
+import ContractContext from '../ContractContext';
 
 const Sidebar = () => {
+
+    const { Connect, address, isActive, isConnected } = useContext(ContractContext)
 
     const [navbar, setNavbar] = useState(false);
     const showNavbar = () => setNavbar(!navbar)
@@ -18,6 +21,15 @@ const Sidebar = () => {
                         <div onClick={showNavbar}>{!navbar ? <FaIcons.FaBars /> : <AiIcons.AiOutlineClose />}
                         </div>
                     </Link>
+                    <div className='top-menu'>
+                        <p className='top-menu-items'>Address: {address}</p>
+                        <div>
+                            <button className='button-18' style={{
+                                backgroundColor: isActive ? '#EE6C4D' : '',
+                                color: isActive ? 'white' : '',
+                            }} onClick={Connect} >{isConnected}</button>
+                        </div>
+                    </div>
                 </div>
                 <nav className={navbar ? 'nav-menu active' : 'nav-menu'}>
                     <ul className='nav-menu-items' onClick={showNavbar}>

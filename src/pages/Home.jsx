@@ -1,7 +1,7 @@
-const MyReports = () => {
+const Home = () => {
   return (
     <>
-    <div>My Reports</div>
+    <div>Home</div>
     <p>lorem expands to Lorem ipsum dolor sit amet,</p>
     <p>consectetur adipisicing elit. Aspernatur,</p>
     <p>non, quos voluptas vel earum unde laboriosam</p>
@@ -11,4 +11,4 @@ const MyReports = () => {
   )
 }
 
-export default MyReports;
+export default Home;
