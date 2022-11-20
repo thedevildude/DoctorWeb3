@@ -7,9 +7,9 @@ const Web3card = () => {
     <>
       <IconContext.Provider value={{ size: 50, color: '#fff' }}>
       <div className='cards'>
-        {Web3cardData.map((card) => {
+        {Web3cardData.map((card, index) => {
           return (
-            <div className='card-container'>
+            <div key={index} className='card-container'>
               <div className='card-text-box'>
                 <p className='card-head-text'>{card.title}</p>
                 <p className='card-value-text'>{card.data}</p>
