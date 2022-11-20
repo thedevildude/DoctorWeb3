@@ -65,7 +65,7 @@ const Register = () => {
                 onChange={handleChange2}
               />
             </div>
-            <div className='form-item'>
+            <div className='radio-item'>
               <label htmlFor='doctorhospital'>Doctor</label>
               <input type="radio"
                 className='form-control'
@@ -74,7 +74,7 @@ const Register = () => {
                 {...medicalInputProps}
               />
             </div>
-            <div className='form-item'>
+            <div className='radio-item'>
               <label htmlFor='doctorhospital'>Hospital</label>
               <input type="radio"
                 className='form-control'
@@ -83,7 +83,7 @@ const Register = () => {
                 {...medicalInputProps}
               />
             </div>
-            <button className="button-18" type="submit" onClick={handleSubmitClick}>Submit</button>
+            <button type="submit" onClick={handleSubmitClick}>Submit</button>
           </div>
         </form>
       </div>

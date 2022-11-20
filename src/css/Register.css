@@ -3,8 +3,44 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
 }
 
-.form-inner {
-    border: 2px solid;
+.form-title {
+  margin-bottom: 2rem;
 }
+
+.container input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.container button {
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+  }
+  .container button:hover,.form button:active,.form button:focus {
+    background: #43A047;
+  }
+
+  .radio-item {
+    display: flex;
+    align-items: center;
+  }

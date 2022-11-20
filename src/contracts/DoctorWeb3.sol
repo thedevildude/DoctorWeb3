@@ -126,14 +126,11 @@ contract DoctorWeb3 is ChainlinkClient {
         //ChainLink Code for Verification
 
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
-        request.add("get", "");
+        request.add("get", "https://mocki.io/v1/88e20328-792c-4323-93d1-704de954914c");
 
         //Set the path
-        /* {
-            "VERIFICATION":
-                "STATUS": true
-        } */
-        request.add("path", "VERIFICATION.STATUS");
+        /* {"data":{"id":true}} */
+        request.add("path", "data.id");
 
         requestId = sendChainlinkRequestTo(oracle, request, fee);
         Applicants[requestId] = Applicant(
