@@ -8,6 +8,7 @@ import UploadReports from './pages/UploadReports';
 import FindHospitals from './pages/FindHospitals';
 import FindDoctors from './pages/FindDoctors';
 import Register from './pages/Register';
+import ComponentTest from './pages/ComponentTest';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path='/findhospitals' element={<FindHospitals/>}/>
           <Route path='/finddoctors' element={<FindDoctors/>}/>
           <Route path='/register' element={<Register/>}/>
+          <Route path='/componenttest' element={<ComponentTest/>}/>
         </Routes>
     </Router>
     </ContractProvider>
