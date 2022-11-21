@@ -9,9 +9,9 @@ export const ContractProvider = ({ children }) => {
     const [isActive, setIsActive] = useState(false)
     const [isConnected, setIsConnected] = useState("Connect Wallet")
     const [doctorWeb3, setDoctorWeb3] = useState()
-    const [contractAddress, setContractAddress] = useState()
+    /* const [contractAddress, setContractAddress] = useState() */
 
-    
+
     const Connect = async () => {
         if (!window.ethereum) {
             window.alert("Non Ethereum window detected. Please use Metamask")
@@ -29,12 +29,14 @@ export const ContractProvider = ({ children }) => {
             setIsConnected("Wallet Connected")
             setAddress(_address)
             setDoctorWeb3(_doctorWeb3)
-            setContractAddress(contractAddress)
+            /* setContractAddress(contractAddress) */
+            
         }
     }
 
     const sendDataForVerification = async (name, medicalId, applicantType) => {
-        console.log(contractAddress);
+        let _name = await doctorWeb3.getValue()
+        console.log(_name);
     }
 
     const formatInterface = async () => {
