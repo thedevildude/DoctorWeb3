@@ -35,8 +35,11 @@ export const ContractProvider = ({ children }) => {
     }
 
     const sendDataForVerification = async (name, medicalId, applicantType) => {
-        let _name = await doctorWeb3.getValue()
-        console.log(_name);
+        const tx = await doctorWeb3.ApplyForVerification(name, "0xffe647530F927180b857386Eaee4162a9454ece8", medicalId, applicantType)
+        await tx.wait()
+        console.log(tx);
+        let DH = await doctorWeb3.findHospitals()
+        console.log(DH);
     }
 
     const formatInterface = async () => {

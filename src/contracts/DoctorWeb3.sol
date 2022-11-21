@@ -19,14 +19,17 @@ contract DoctorWeb3 is ChainlinkClient {
     bytes32 private jobId;
     uint256 private fee;
     string _value;
+    uint256 requestId;
 
     constructor() {
         owner = msg.sender;
         setChainlinkToken(0x326C977E6efc84E512bB9C30f76E30c160eD06FB);
         oracle = 0x40193c8518BB267228Fc409a613bDbD8eC5a97b3;
-        jobId = "c1c5e92880894eb6b27d3cae19670aa3";
+        jobId = "ca98366cc7314957b8c012c72f05aeeb";
         fee = 0.1 * 10 ** 18; // 0.1 LINK
         _value = "hello";
+        requestId = 1;
+
     }
     event ValueChanged(address indexed author, string oldValue, string newValue);
 
@@ -64,7 +67,8 @@ contract DoctorWeb3 is ChainlinkClient {
     address[] Hospitals;
     mapping(address => string[]) public PatientReports; // Maps Patient's address to its reports
     mapping(string => Report) public Reports; // Maps report hash value from IPFS to Report Datatype
-    mapping(bytes32 => Applicant) public Applicants; // Maps address of applicant to Applicant DataType
+    //mapping(bytes32 => Applicant) public Applicants; // Maps address of applicant to Applicant DataType
+    mapping(uint256 => Applicant) public Applicants;
     mapping(string => bool) private medicalIdUsed; // Maps medicalId to boolean
     mapping(address => AuthorizedDHDetails) public AuthorizedDH; // Maps address of authorized Doctor or hospital with their details
     mapping(address => bool) public AuthorisedHospital;
@@ -136,7 +140,7 @@ contract DoctorWeb3 is ChainlinkClient {
         return AuthorizedDH[_address];
     }
 
-    function ApplyForVerification(
+    /* function ApplyForVerification(
         string memory _name,
         address _applicantAddress,
         string memory _medicalId,
@@ -148,11 +152,11 @@ contract DoctorWeb3 is ChainlinkClient {
         //ChainLink Code for Verification
 
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
-        request.add("get", "https://mocki.io/v1/88e20328-792c-4323-93d1-704de954914c");
+        request.add("get", "https://mocki.io/v1/9471e151-4903-43bb-8bf9-45e98994672b");
 
-        //Set the path
-        /* {"data":{"id":true}} */
-        request.add("path", "data.id");
+        //Set the path {"data":{"id":100}}
+
+        request.add("path", "data,id");
 
         requestId = sendChainlinkRequestTo(oracle, request, fee);
         Applicants[requestId] = Applicant(
@@ -165,12 +169,12 @@ contract DoctorWeb3 is ChainlinkClient {
         return requestId;
     }
 
-    function fulfill(bytes32 _requestId, bool _verification)
+    function fulfill(bytes32 _requestId, uint256 _verification)
         public
         recordChainlinkFulfillment(_requestId)
     {
         Applicant memory applicant = Applicants[_requestId];
-        if (_verification) {
+        if (_verification == 100) {
             if (applicant.applicantType == 0) {
                 addAuthorizedDoctor(
                     applicant.applicantAddress,
@@ -189,6 +193,42 @@ contract DoctorWeb3 is ChainlinkClient {
             emit AuthorizationResult(applicant.applicantAddress, applicant.medicalId, false);
         }
         medicalIdUsed[applicant.medicalId] = true;
+    } */
+
+    function ApplyForVerification(
+        string memory _name,
+        address _applicantAddress,
+        string memory _medicalId,
+        uint256 _applicantType
+    ) public {
+        //require(_applicantType == 1 || _applicantType == 0,"Apply id should be either 0 or 1");
+        //require(!medicalIdUsed[_medicalId], "Medical ID is already used"); // Stopping function spamming
+        Applicants[requestId] = Applicant(
+            _name,
+            _applicantAddress,
+            _medicalId,
+            _applicantType
+        );
+
+        Applicant memory applicant = Applicants[requestId];
+
+        if (applicant.applicantType == 0) {
+                addAuthorizedDoctor(
+                    applicant.applicantAddress,
+                    applicant.name,
+                    applicant.medicalId
+                );
+            } else if (applicant.applicantType == 1)  {
+                addAuthorizedHospital(
+                    applicant.applicantAddress,
+                    applicant.name,
+                    applicant.medicalId
+                );
+            }
+        requestId = requestId + 1;
+        emit AuthorizationResult(applicant.applicantAddress, applicant.medicalId, true);
+        medicalIdUsed[applicant.medicalId] = true;
+
     }
 
     function addAuthorizedDoctor(

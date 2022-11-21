@@ -21,7 +21,7 @@ const useRadioButtons = (name) => {
 
 const Register = () => {
   
-  const { address, sendDataForVerification } = useContext(ContractContext)
+  const { sendDataForVerification } = useContext(ContractContext)
   const [medicalValue, medicalInputProps] = useRadioButtons("doctorhospital");
 
   const [state , setState] = useState({
@@ -42,7 +42,7 @@ const Register = () => {
     console.log(state.medicalId);
     console.log(medicalValue);
     
-    sendDataForVerification(state.name, address, parseInt(state.medicalId), parseInt(medicalValue))
+    sendDataForVerification(state.name, parseInt(state.medicalId), parseInt(medicalValue))
 }
   return (
     <>
