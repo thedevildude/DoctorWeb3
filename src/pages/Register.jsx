@@ -1,7 +1,9 @@
 import '../css/Register.css';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import ContractContext from '../ContractContext';
 
 const useRadioButtons = (name) => {
+  
   const [value, setState] = useState(null);
 
   const handleChange = e => {
@@ -18,7 +20,8 @@ const useRadioButtons = (name) => {
 }
 
 const Register = () => {
-
+  
+  const { address, sendDataForVerification } = useContext(ContractContext)
   const [medicalValue, medicalInputProps] = useRadioButtons("doctorhospital");
 
   const [state , setState] = useState({
@@ -38,6 +41,8 @@ const Register = () => {
     console.log(state.name);
     console.log(state.medicalId);
     console.log(medicalValue);
+    
+    sendDataForVerification(state.name, address, parseInt(state.medicalId), parseInt(medicalValue))
 }
   return (
     <>
@@ -50,7 +55,7 @@ const Register = () => {
               <input type="string"
                 className="form-control"
                 id="name"
-                placeholder="Dr xyz"
+                placeholder="Dr XYZ"
                 value={state.name}
                 onChange={handleChange2}
               />

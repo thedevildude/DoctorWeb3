@@ -18,6 +18,7 @@ contract DoctorWeb3 is ChainlinkClient {
     address private oracle;
     bytes32 private jobId;
     uint256 private fee;
+    string _value;
 
     constructor() {
         owner = msg.sender;
@@ -25,7 +26,10 @@ contract DoctorWeb3 is ChainlinkClient {
         oracle = 0x40193c8518BB267228Fc409a613bDbD8eC5a97b3;
         jobId = "c1c5e92880894eb6b27d3cae19670aa3";
         fee = 0.1 * 10 ** 18; // 0.1 LINK
+        _value = "hello";
     }
+    event ValueChanged(address indexed author, string oldValue, string newValue);
+
 
     struct PatientInfo {
         address patient;
@@ -85,6 +89,24 @@ contract DoctorWeb3 is ChainlinkClient {
         string medicalId,
         uint AuthOnDate
     );
+
+    function getValue() view public returns (string memory) {
+        return _value;
+    }
+
+    function setValue(string memory value) public {
+        emit ValueChanged(msg.sender, _value, value);
+        _value = value;
+    }
+
+    function testFunction() public pure returns (string memory myString) {
+        return "Hello! The Contract is connected with web3";
+    }
+
+    event Received(address, uint);
+    receive() external payable {
+        emit Received(msg.sender, msg.value);
+    }
 
     function getPatientReports(address _address)
         public
@@ -237,7 +259,4 @@ contract DoctorWeb3 is ChainlinkClient {
         PatientReports[msg.sender].push(_fileHash);
     }
 
-    function testFunction() public pure returns (string memory myString) {
-        return "Hello! The Contract is connected with web3";
-    }
 }

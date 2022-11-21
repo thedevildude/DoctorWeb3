@@ -14,12 +14,21 @@ module.exports = {
     // Useful for deploying to a public network.
     // Note: It's important to wrap the provider as a function to ensure truffle uses a new provider every time.
     matic: {
-       provider: () => new HDWalletProvider(mnemonic, `https://rpc-mumbai.maticvigil.com`),
+       provider: () => new HDWalletProvider(mnemonic, `https://polygon-mumbai.g.alchemy.com/v2/bSo8uRanqGbniOrDUntxo6ycFm7QKF-A`),
        network_id: 80001,   // Matic's id
-       confirmations: 2,    // # of confirmations to wait between deployments. (default: 0)
+       confirmations: 1,    // # of confirmations to wait between deployments. (default: 0)
        timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
        skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
      },
+     goerli: {
+      provider: () => new HDWalletProvider(mnemonic, `https://eth-goerli.g.alchemy.com/v2/m1MzTp6gqvLngZae6SHQBMYLRoE1Uet5`),
+      network_id: 5,   // Goerli's id
+      confirmations: 1,    // # of confirmations to wait between deployments. (default: 0)
+      timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+      gas: 4465030,
+      gasPrice: 10000000000,
+      skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+    },
   },
 
   contracts_directory: './src/contracts/',
