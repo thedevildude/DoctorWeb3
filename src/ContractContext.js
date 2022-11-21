@@ -9,8 +9,6 @@ export const ContractProvider = ({ children }) => {
     const [isActive, setIsActive] = useState(false)
     const [isConnected, setIsConnected] = useState("Connect Wallet")
     const [doctorWeb3, setDoctorWeb3] = useState()
-    /* const [contractAddress, setContractAddress] = useState() */
-
 
     const Connect = async () => {
         if (!window.ethereum) {
@@ -35,11 +33,10 @@ export const ContractProvider = ({ children }) => {
     }
 
     const sendDataForVerification = async (name, medicalId, applicantType) => {
-        const tx = await doctorWeb3.ApplyForVerification(name, "0xffe647530F927180b857386Eaee4162a9454ece8", medicalId, applicantType)
+        const tx = await doctorWeb3.ApplyForVerification(name, "0x48d82599a86fb72DdFb37077BFFe29A3c44700Ab", medicalId, applicantType)
         await tx.wait()
         console.log(tx);
-        let DH = await doctorWeb3.findHospitals()
-        console.log(DH);
+        window.alert("Registered")
     }
 
     const formatInterface = async () => {
@@ -47,6 +44,7 @@ export const ContractProvider = ({ children }) => {
         iface = iface.format(FormatTypes.full)
         return iface
     }
+
 
     return (
         <ContractContext.Provider value={{ Connect, address, isActive, isConnected, doctorWeb3, sendDataForVerification }}>

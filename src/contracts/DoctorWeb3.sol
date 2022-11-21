@@ -68,7 +68,7 @@ contract DoctorWeb3 is ChainlinkClient {
     mapping(address => string[]) public PatientReports; // Maps Patient's address to its reports
     mapping(string => Report) public Reports; // Maps report hash value from IPFS to Report Datatype
     //mapping(bytes32 => Applicant) public Applicants; // Maps address of applicant to Applicant DataType
-    mapping(uint256 => Applicant) public Applicants;
+    mapping(uint256 => Applicant) public Applicants; // remove during main chain
     mapping(string => bool) private medicalIdUsed; // Maps medicalId to boolean
     mapping(address => AuthorizedDHDetails) public AuthorizedDH; // Maps address of authorized Doctor or hospital with their details
     mapping(address => bool) public AuthorisedHospital;
