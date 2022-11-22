@@ -28,15 +28,15 @@ export const ContractProvider = ({ children }) => {
             setAddress(_address)
             setDoctorWeb3(_doctorWeb3)
             /* setContractAddress(contractAddress) */
-            
+
         }
     }
 
     const sendDataForVerification = async (name, medicalId, applicantType) => {
-        const tx = await doctorWeb3.ApplyForVerification(name, "0x48d82599a86fb72DdFb37077BFFe29A3c44700Ab", medicalId, applicantType)
+        const tx = await doctorWeb3.ApplyForVerification(name, address, medicalId, applicantType)
         await tx.wait()
         console.log(tx);
-        window.alert("Registered")
+        window.alert(`Registered`)
     }
 
     const formatInterface = async () => {
@@ -45,9 +45,37 @@ export const ContractProvider = ({ children }) => {
         return iface
     }
 
+    const findDHDetails = async (medicalId) => {
+        const doctorAddress = await doctorWeb3.findDoctors()
+        const hospitalAddress = await doctorWeb3.findHospitals()
+        const detailArray = [];
+        if (medicalId === 0) {
+            const helpObject = {}
+            for (let i = 0; i < doctorAddress.length; i++) {
+                const data = await doctorWeb3.getAuthorizedDHDetails(doctorAddress[i])
+                data.forEach((element, index) => {
+                    helpObject['detail' + index] = element;
+                });
+                detailArray.push(helpObject)
+            }
+            console.log(detailArray);
+            return detailArray
+        }
+        else if (medicalId === 1) {
+
+            for (let i = 0; i < hospitalAddress.length; i++) {
+                const data = await doctorWeb3.getAuthorizedDHDetails(doctorAddress[i])
+                console.log(data);
+                detailArray.push(data)
+            }
+            console.log(detailArray);
+            return detailArray
+        }
+
+    }
 
     return (
-        <ContractContext.Provider value={{ Connect, address, isActive, isConnected, doctorWeb3, sendDataForVerification }}>
+        <ContractContext.Provider value={{ Connect, address, isActive, isConnected, doctorWeb3, sendDataForVerification, findDHDetails }}>
             {children}
         </ContractContext.Provider>
     )

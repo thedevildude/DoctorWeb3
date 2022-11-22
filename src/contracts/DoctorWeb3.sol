@@ -136,8 +136,11 @@ contract DoctorWeb3 is ChainlinkClient {
         return Hospitals;
     }
 
-    function getAuthorizedDHDetails(address _address) public view returns (AuthorizedDHDetails memory) {
-        return AuthorizedDH[_address];
+    function getAuthorizedDHDetails(address _addr) public view returns (address, string memory, string memory) {
+        string memory _name = AuthorizedDH[_addr].name;
+        address _address = AuthorizedDH[_addr].authorizedDHAddress;
+        string memory _medicalId = AuthorizedDH[_addr].medicalId;
+        return (_address, _name, _medicalId);
     }
 
     /* function ApplyForVerification(
