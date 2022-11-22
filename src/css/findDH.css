@@ -1,0 +1,49 @@
+.findDH {
+    display: flex-start;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.findDH-button {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loading-text {
+    font-size: x-large;
+    margin-top: 2rem;
+}
+
+.findDH-card {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    align-items: center;
+    border: 2px;
+    padding: 2%;
+    margin: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.findDH-cards {
+    display: flex;
+    justify-content: center;
+}
+
+.findDH-card-address {
+    font-size: small;
+    word-wrap: break-word;
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.findDH-card-name {
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1rem;
+    width: 100%;
+}

@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import ContractContext from '../ContractContext';
+import '../css/findDH.css'
 
 const FindDoctors = () => {
 
@@ -9,45 +10,37 @@ const FindDoctors = () => {
 
   const findDHDetails = async (medicalId) => {
     const doctorAddress = await doctorWeb3.findDoctors()
-    const hospitalAddress = await doctorWeb3.findHospitals()
     const detailArray = [];
-    if (medicalId === 0) {
-      for (let i = 0; i < await doctorAddress.length; i++) {
-        let helpObject = {}
-        const data = await doctorWeb3.getAuthorizedDHDetails(doctorAddress[i])
-        data.forEach((element, index) => {
-          helpObject['detail' + index] = element;
-        });
-        detailArray.push(helpObject)
-      }
-      console.log(detailArray);
-      setDoctorDetails(detailArray)
-      setLoading(false)
+    for (let i = 0; i < await doctorAddress.length; i++) {
+      let helpObject = {}
+      const data = await doctorWeb3.getAuthorizedDHDetails(doctorAddress[i])
+      data.forEach((element, index) => {
+        helpObject['detail' + index] = element;
+      });
+      detailArray.push(helpObject)
     }
-    else if (medicalId === 1) {
-
-      for (let i = 0; i < hospitalAddress.length; i++) {
-        const data = await doctorWeb3.getAuthorizedDHDetails(doctorAddress[i])
-        console.log(data);
-        detailArray.push(data)
-      }
-      console.log(detailArray);
-      return detailArray
-    }
+    console.log(detailArray);
+    setDoctorDetails(detailArray)
+    setLoading(false)
 
   }
 
   return (
-    <div>
-      <button onClick={() => findDHDetails(0)}>Click for detail</button>
-        {loading ? <p>Loading</p>: doctorDetails.map((item, index) => {
+    <div className='findDH'>
+      <div className='findDH-button'>
+        <button className='button-18' onClick={() => findDHDetails(0)}>Click to load Doctors</button>
+      </div>
+      <div className='findDH-cards'>
+        {loading ? <p className='loading-text'>Loading...</p> : doctorDetails.map((item, index) => {
           return (
-            <div key={index}>
-            {item.detail0}
-            {item.detail1}
+            <div key={index} className="findDH-card">
+              <img className='findDH-card-image' src='https://via.placeholder.com/200' alt='' />
+              <p className='findDH-card-name'>{item.detail1}</p>
+              <p className='findDH-card-address'>{item.detail0}</p>
             </div>
           )
         })}
+      </div>
     </div>
   )
 }
