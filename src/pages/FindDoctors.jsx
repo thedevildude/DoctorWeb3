@@ -8,7 +8,7 @@ const FindDoctors = () => {
   const [doctorDetails, setDoctorDetails] = useState([])
   const [loading, setLoading] = useState(true)
 
-  const findDHDetails = async (medicalId) => {
+  const findDHDetails = async () => {
     const doctorAddress = await doctorWeb3.findDoctors()
     const detailArray = [];
     for (let i = 0; i < await doctorAddress.length; i++) {
