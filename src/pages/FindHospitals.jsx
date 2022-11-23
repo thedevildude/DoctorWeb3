@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import ContractContext from '../ContractContext';
-import '../css/findDH.css'
+import '../css/findDoctorHospital.css'
 
 const FindHospitals = () => {
 
@@ -27,6 +27,7 @@ const FindHospitals = () => {
 
   return (
     <div className='findDH'>
+      <h1 className='findDH-title'>Registered Hospitals</h1>
       <div className='findDH-button'>
         <button className='button-18' onClick={() => findDHDetails(0)}>Click to load Hospitals</button>
       </div>

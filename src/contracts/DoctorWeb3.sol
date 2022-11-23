@@ -5,7 +5,7 @@ pragma solidity ^0.8.0;
 // [X] 2  - Find Patient/User Reports Collection
 // [X] 3  - Find Doctors
 // [X] 4  - Find Hospitals
-// [X] 5  - Send Report to Doctor/Hospital for analysis
+// [ ] 5  - Send Report to Doctor/Hospital for analysis
 // [ ] 6  - Send Report Analysis back to patient
 // [ ] 7  - Reviews Doctor/Hospital on receiving the report
 // [X] 8  - Find authorized Doctor/Hospital

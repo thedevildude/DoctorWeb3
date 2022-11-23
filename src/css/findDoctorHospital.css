@@ -1,14 +1,16 @@
 .findDH {
-    display: flex-start;
+    display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.findDH-title {
+    margin-top: 2rem;
 }
 
 .findDH-button {
     margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .loading-text {

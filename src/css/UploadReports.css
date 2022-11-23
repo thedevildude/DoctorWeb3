@@ -1,0 +1,47 @@
+.upload-reports {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-reports-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.upload-reports-form-container {
+    display: flex;
+    flex-direction: column;
+    width: 650px;
+    margin: auto;
+}
+
+.upload-reports-form-title {
+    margin: 2rem 0 2rem 0;
+}
+
+.upload-reports-form input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 40%;
+    border: 0;
+    margin: 0 1rem 1rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+.upload-reports-form input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.upload-reports-form input[type=number] {
+  -moz-appearance: textfield;
+}

@@ -10,6 +10,7 @@
     "@truffle/hdwallet-provider": "^2.1.1",
     "ethers": "^5.7.2",
     "hummus": "^1.0.111",
+    "ipfs-core": "^0.17.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",

@@ -33,7 +33,7 @@ export const ContractProvider = ({ children }) => {
     }
 
     const sendDataForVerification = async (name, medicalId, applicantType) => {
-        const tx = await doctorWeb3.ApplyForVerification(name, "0xAE8C194006E3652918E3d02141D9D13441760046", medicalId, applicantType)
+        const tx = await doctorWeb3.ApplyForVerification(name, "0xB8F2a69af3830Cd4061E2Cbbc5f1617d784806D4", medicalId, applicantType)
         await tx.wait()
         console.log(tx);
         window.alert(`Registered`)
