@@ -1,6 +1,5 @@
-import "../css/UploadReports.css"
+import "../css/UploadReports.css";
 import { useState } from "react";
-
 
 const UploadReports = () => {
 
@@ -31,13 +30,7 @@ const UploadReports = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault()
-    /* const ipfs = await IPFS.create()
-    console.log(`IPFS Node created: ${ipfs}`);
-    const results = ipfs.add(selectedFile)
-    for await (const { cid } of results) {
-      console.log(cid.toString())
-      window.alert(`${selectedFile.name} uploaded with CID: ${cid.toString()}`)
-    } */
+    console.log(selectedFile.name);
     setSelectedFile("")
   }
 
