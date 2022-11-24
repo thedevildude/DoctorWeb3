@@ -1,9 +1,11 @@
 import "../css/UploadReports.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { create } from "ipfs-http-client";
+import ContractContext from "../ContractContext";
 
 const UploadReports = () => {
 
+  const { UploadReport } = useContext(ContractContext)
   const [category, setCategory] = useState("")
   const [age, setAge] = useState("")
   const [weight, setWeight] = useState("")
@@ -34,12 +36,13 @@ const UploadReports = () => {
     console.log(selectedFile.name);
     let ipfs = await ipfsClient()
     const {cid} = await ipfs.add(selectedFile)
-    console.log(cid);
+    console.log(cid.toString());
+    await UploadReport(cid.toString(), category, age, weight, height, gender, bloodgroup)
     setSelectedFile("")
   }
 
   const ipfsClient = async () => {
-    const ipfs = create(new URL('http://127.0.0.1:5001/k51qzi5uqu5dm4otgfznoq4jl8xavfscsgg6fqquyk8fncrdvq4pqwwdpi7jhy'))
+    const ipfs = create(new URL('http://127.0.0.1:5002/'))
     return ipfs
   }
 

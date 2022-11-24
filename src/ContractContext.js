@@ -74,11 +74,20 @@ export const ContractProvider = ({ children }) => {
 
     }
 
+    const UploadReport = async (_fileHash, _category, _age, _weight, _height, _gender, _bloodGroup) => {
+        const tx = await doctorWeb3.uploadReport(_fileHash, _category, _age, _weight, _height, _gender, _bloodGroup)
+        await tx.wait()
+        doctorWeb3.on("ReportUploaded", (fileHash, category) => {
+            window.alert(`Report with filehash ${fileHash} of ${category} category uploaded successfully`)
+        })
+    }
+
     return (
-        <ContractContext.Provider value={{ Connect, address, isActive, isConnected, doctorWeb3, sendDataForVerification, findDHDetails }}>
+        <ContractContext.Provider value={{ Connect, address, isActive, isConnected, doctorWeb3, sendDataForVerification, findDHDetails, UploadReport }}>
             {children}
         </ContractContext.Provider>
     )
 }
+
 
 export default ContractContext;

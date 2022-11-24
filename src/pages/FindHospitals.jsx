@@ -19,7 +19,6 @@ const FindHospitals = () => {
       });
       detailArray.push(helpObject)
     }
-    console.log(detailArray);
     setDoctorDetails(detailArray)
     setLoading(false)
 

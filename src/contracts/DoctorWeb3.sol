@@ -94,6 +94,11 @@ contract DoctorWeb3 is ChainlinkClient {
         uint AuthOnDate
     );
 
+    event ReportUploaded(
+        string fileHash,
+        string category
+    );
+
     function getValue() view public returns (string memory) {
         return _value;
     }
@@ -112,12 +117,12 @@ contract DoctorWeb3 is ChainlinkClient {
         emit Received(msg.sender, msg.value);
     }
 
-    function getPatientReports(address _address)
+    function getPatientReports()
         public
         view
         returns (string[] memory)
     {
-        return PatientReports[_address];
+        return PatientReports[msg.sender];
     }
 
     function getDetailedReports(string memory _fileHash)
@@ -300,6 +305,8 @@ contract DoctorWeb3 is ChainlinkClient {
 
         Reports[_fileHash] = _report;
         PatientReports[msg.sender].push(_fileHash);
+
+        emit ReportUploaded(_fileHash, _category);
     }
 
 }

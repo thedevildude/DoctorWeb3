@@ -14,6 +14,11 @@ const DoctorArray = [
         medicalId: "5654"
     },
     {
+        name: "Dr Shipra Ghoshal",
+        address: "0xA2F362BE705799bD6d1F35eDb58030Bf4a2b9008",
+        medicalId: "2514"
+    },
+    {
         name: "Dr Bishwarup Biswas",
         address: "0x82331017CD2010D2356D1a36E1078d0897fd15B9",
         medicalId: "5432"
