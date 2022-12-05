@@ -1,4 +1,4 @@
-import './Web3card.css';
+import '../css/Web3card.css';
 import { IconContext } from 'react-icons';
 import { Web3cardData } from './Web3cardData';
 

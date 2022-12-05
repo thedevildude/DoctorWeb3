@@ -28,17 +28,17 @@ const MyReports = () => {
     <div className="my-reports">
       <h1 className="my-reports-title">My Reports</h1>
       <div className="my-reports-button">
-        <button className="button-18" onClick={FindReports}>Find Reports</button>
+        <button className="button-18" onClick={FindReports}>Load Reports</button>
       </div>
       <div className="reports-box">
         {loading ? <p className='loading-text'>Loading...</p> : reports.map((item, index) => {
           return (
             <div key={index} className="report-box">
-              <div className="">
-                <p>FileHash</p>
-                <p>{item[0]}</p>
+              <div className="report-filehash-box">
+                <p className="filehash-box-title">FileHash</p>
+                <p className="filehash-box-filehash"><a href={`http://127.0.0.1:9090/ipfs/${item[0]}`} target="_blank" rel="noopener noreferrer">{item[0]}</a></p>
               </div>
-              <p>{item[1]}</p>
+              <p className="report-box-category">{item[1]}</p>
             </div>
           )
         })}

@@ -9,6 +9,7 @@ export const ContractProvider = ({ children }) => {
     const [isActive, setIsActive] = useState(false)
     const [isConnected, setIsConnected] = useState("Connect Wallet")
     const [doctorWeb3, setDoctorWeb3] = useState()
+    const [balance, setBalance] = useState()
 
     const Connect = async () => {
         if (!window.ethereum) {
@@ -19,6 +20,8 @@ export const ContractProvider = ({ children }) => {
             await provider.send("eth_requestAccounts", [])
             const signer = provider.getSigner()
             const _address = await signer.getAddress()
+            let _balance = await provider.getBalance(_address)
+            _balance = ethers.utils.formatEther(_balance)
             const NetworkId = provider.network.chainId
             const contractAddress = DoctorWeb3.networks[NetworkId].address
             const doctorWeb3_abi = await formatInterface()
@@ -27,6 +30,7 @@ export const ContractProvider = ({ children }) => {
             setIsConnected("Wallet Connected")
             setAddress(_address)
             setDoctorWeb3(_doctorWeb3)
+            setBalance(_balance)
             /* setContractAddress(contractAddress) */
 
         }
@@ -83,7 +87,7 @@ export const ContractProvider = ({ children }) => {
     }
 
     return (
-        <ContractContext.Provider value={{ Connect, address, isActive, isConnected, doctorWeb3, sendDataForVerification, findDHDetails, UploadReport }}>
+        <ContractContext.Provider value={{ Connect, address, balance, isActive, isConnected, doctorWeb3, sendDataForVerification, findDHDetails, UploadReport }}>
             {children}
         </ContractContext.Provider>
     )
