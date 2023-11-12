@@ -1,17 +1,28 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { SidebarData } from "./SidebarData";
 import "./Sidebar.css";
 import { IconContext } from "react-icons";
-import ContractContext from "../ContractContext";
+import { useContextState, useContextDispatch } from "../context/context";
+import { connect } from "../context/actions";
 
 const Sidebar = () => {
-  const { Connect, address, isActive } = useContext(ContractContext);
+  const { address, isLoading, isConnected, errorMessage } = useContextState();
+  const contextDispatch = useContextDispatch();
 
   const [navbar, setNavbar] = useState(false);
   const showNavbar = () => setNavbar(!navbar);
+
+  const connectWallet = async () => {
+    await connect(contextDispatch);
+  };
+
+  if (errorMessage !== "") {
+    alert(errorMessage);
+  }
+
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
@@ -27,12 +38,16 @@ const Sidebar = () => {
               <button
                 className="button-18"
                 style={{
-                  backgroundColor: isActive ? "#EE6C4D" : "",
-                  color: isActive ? "white" : "",
+                  backgroundColor: isConnected ? "#EE6C4D" : "",
+                  color: isConnected ? "white" : "",
                 }}
-                onClick={Connect}
+                onClick={() => connectWallet()}
               >
-                {isActive ? "Wallet Connected" : "Connect Wallet"}
+                {isLoading
+                  ? "Loading..."
+                  : isConnected
+                  ? "Connected"
+                  : "Connect Wallet"}
               </button>
             </div>
           </div>
