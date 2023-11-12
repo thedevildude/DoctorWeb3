@@ -1,9 +1,9 @@
 {
   "contractName": "BufferChainlink",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"details\":\"A library for working with mutable byte buffers in Solidity. Byte buffers are mutable and expandable, and provide a variety of primitives for writing to them. At any time you can fetch a bytes object containing the current contents of the buffer. The bytes object should not be stored between operations, as it may change due to resizing of the buffer.\",\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@chainlink/contracts/src/v0.8/vendor/BufferChainlink.sol\":\"BufferChainlink\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@chainlink/contracts/src/v0.8/vendor/BufferChainlink.sol\":{\"keccak256\":\"0x89388a631c16ad993e4d76d8d19e08ae98e1397f5dfdfb5f9c0b91015df4cf5d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://88cb96caa94128821daec5478c0f3646902007b81a0604b2e3ab79ea2f40b056\",\"dweb:/ipfs/Qmd1nu9CpgouPmukNQpZThxKgPZAayXxqBfwbDVHfMrCrF\"]}},\"version\":1}",
-  "bytecode": "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212203188b45ef101422915145e120b1f5b66aff25bf77f4fe6b4a92b0e46e4ad5f0664736f6c63430008110033",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212203188b45ef101422915145e120b1f5b66aff25bf77f4fe6b4a92b0e46e4ad5f0664736f6c63430008110033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"details\":\"A library for working with mutable byte buffers in Solidity. Byte buffers are mutable and expandable, and provide a variety of primitives for writing to them. At any time you can fetch a bytes object containing the current contents of the buffer. The bytes object should not be stored between operations, as it may change due to resizing of the buffer.\",\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@chainlink/contracts/src/v0.8/vendor/BufferChainlink.sol\":\"BufferChainlink\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@chainlink/contracts/src/v0.8/vendor/BufferChainlink.sol\":{\"keccak256\":\"0x89388a631c16ad993e4d76d8d19e08ae98e1397f5dfdfb5f9c0b91015df4cf5d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://88cb96caa94128821daec5478c0f3646902007b81a0604b2e3ab79ea2f40b056\",\"dweb:/ipfs/Qmd1nu9CpgouPmukNQpZThxKgPZAayXxqBfwbDVHfMrCrF\"]}},\"version\":1}",
+  "bytecode": "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212200fe33158ed068a79a45e529db2775b047a4550b40c98a0e6b0d57187598645ac64736f6c634300080d0033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212200fe33158ed068a79a45e529db2775b047a4550b40c98a0e6b0d57187598645ac64736f6c634300080d0033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
@@ -370,7 +370,6 @@
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
-                      "memberLocation": "1218:8:8",
                       "memberName": "capacity",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 1203,
@@ -633,9 +632,6 @@
                     "pathNode": {
                       "id": 1206,
                       "name": "buffer",
-                      "nameLocations": [
-                        "1015:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "1015:6:8"
@@ -704,9 +700,6 @@
                     "pathNode": {
                       "id": 1212,
                       "name": "buffer",
-                      "nameLocations": [
-                        "1075:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "1075:6:8"
@@ -761,9 +754,6 @@
                         "pathNode": {
                           "id": 1251,
                           "name": "buffer",
-                          "nameLocations": [
-                            "1713:6:8"
-                          ],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 1204,
                           "src": "1713:6:8"
@@ -807,7 +797,6 @@
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
-                      "memberLocation": "1740:3:8",
                       "memberName": "buf",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 1201,
@@ -866,7 +855,6 @@
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
-                      "memberLocation": "1757:8:8",
                       "memberName": "capacity",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 1203,
@@ -896,7 +884,6 @@
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "1770:6:8",
                       "memberName": "length",
                       "nodeType": "MemberAccess",
                       "src": "1768:8:8",
@@ -1007,9 +994,6 @@
                     "pathNode": {
                       "id": 1247,
                       "name": "buffer",
-                      "nameLocations": [
-                        "1692:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "1692:6:8"
@@ -1090,7 +1074,6 @@
                     "isLValue": true,
                     "isPure": false,
                     "lValueRequested": false,
-                    "memberLocation": "1899:3:8",
                     "memberName": "buf",
                     "nodeType": "MemberAccess",
                     "referencedDeclaration": 1201,
@@ -1159,7 +1142,6 @@
                     "isPure": false,
                     "kind": "functionCall",
                     "lValueRequested": false,
-                    "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
                     "src": "1908:19:8",
@@ -1232,7 +1214,6 @@
                     "isPure": false,
                     "kind": "functionCall",
                     "lValueRequested": false,
-                    "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
                     "src": "1933:19:8",
@@ -1280,9 +1261,6 @@
                     "pathNode": {
                       "id": 1272,
                       "name": "buffer",
-                      "nameLocations": [
-                        "1817:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "1817:6:8"
@@ -1684,9 +1662,6 @@
                     "pathNode": {
                       "id": 1316,
                       "name": "buffer",
-                      "nameLocations": [
-                        "2243:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "2243:6:8"
@@ -1728,9 +1703,6 @@
                     "pathNode": {
                       "id": 1320,
                       "name": "buffer",
-                      "nameLocations": [
-                        "2285:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "2285:6:8"
@@ -1804,7 +1776,6 @@
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberLocation": "2908:6:8",
                           "memberName": "length",
                           "nodeType": "MemberAccess",
                           "src": "2903:11:8",
@@ -1847,7 +1818,6 @@
                     "isPure": false,
                     "kind": "functionCall",
                     "lValueRequested": false,
-                    "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
                     "src": "2888:27:8",
@@ -1934,7 +1904,6 @@
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "2942:8:8",
                       "memberName": "capacity",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 1203,
@@ -2003,7 +1972,6 @@
                                     "isLValue": true,
                                     "isPure": false,
                                     "lValueRequested": false,
-                                    "memberLocation": "2980:8:8",
                                     "memberName": "capacity",
                                     "nodeType": "MemberAccess",
                                     "referencedDeclaration": 1203,
@@ -2084,7 +2052,6 @@
                                 "isPure": false,
                                 "kind": "functionCall",
                                 "lValueRequested": false,
-                                "nameLocations": [],
                                 "names": [],
                                 "nodeType": "FunctionCall",
                                 "src": "2972:28:8",
@@ -2147,7 +2114,6 @@
                           "isPure": false,
                           "kind": "functionCall",
                           "lValueRequested": false,
-                          "nameLocations": [],
                           "names": [],
                           "nodeType": "FunctionCall",
                           "src": "2960:45:8",
@@ -3243,9 +3209,6 @@
                     "pathNode": {
                       "id": 1330,
                       "name": "buffer",
-                      "nameLocations": [
-                        "2765:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "2765:6:8"
@@ -3368,9 +3331,6 @@
                     "pathNode": {
                       "id": 1340,
                       "name": "buffer",
-                      "nameLocations": [
-                        "2867:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "2867:6:8"
@@ -3433,7 +3393,6 @@
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberLocation": "4407:3:8",
                           "memberName": "buf",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": 1201,
@@ -3448,7 +3407,6 @@
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "4411:6:8",
                         "memberName": "length",
                         "nodeType": "MemberAccess",
                         "src": "4403:14:8",
@@ -3521,7 +3479,6 @@
                     "isPure": false,
                     "kind": "functionCall",
                     "lValueRequested": false,
-                    "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
                     "src": "4392:37:8",
@@ -3576,9 +3533,6 @@
                     "pathNode": {
                       "id": 1416,
                       "name": "buffer",
-                      "nameLocations": [
-                        "4279:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "4279:6:8"
@@ -3674,9 +3628,6 @@
                     "pathNode": {
                       "id": 1424,
                       "name": "buffer",
-                      "nameLocations": [
-                        "4364:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "4364:6:8"
@@ -3739,7 +3690,6 @@
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberLocation": "4812:3:8",
                           "memberName": "buf",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": 1201,
@@ -3754,7 +3704,6 @@
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "4816:6:8",
                         "memberName": "length",
                         "nodeType": "MemberAccess",
                         "src": "4808:14:8",
@@ -3793,7 +3742,6 @@
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "4835:6:8",
                         "memberName": "length",
                         "nodeType": "MemberAccess",
                         "src": "4830:11:8",
@@ -3842,7 +3790,6 @@
                     "isPure": false,
                     "kind": "functionCall",
                     "lValueRequested": false,
-                    "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
                     "src": "4797:45:8",
@@ -3897,9 +3844,6 @@
                     "pathNode": {
                       "id": 1440,
                       "name": "buffer",
-                      "nameLocations": [
-                        "4708:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "4708:6:8"
@@ -3968,9 +3912,6 @@
                     "pathNode": {
                       "id": 1446,
                       "name": "buffer",
-                      "nameLocations": [
-                        "4769:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "4769:6:8"
@@ -4042,7 +3983,6 @@
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "5287:8:8",
                       "memberName": "capacity",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 1203,
@@ -4109,7 +4049,6 @@
                                 "isLValue": true,
                                 "isPure": false,
                                 "lValueRequested": false,
-                                "memberLocation": "5321:8:8",
                                 "memberName": "capacity",
                                 "nodeType": "MemberAccess",
                                 "referencedDeclaration": 1203,
@@ -4172,7 +4111,6 @@
                           "isPure": false,
                           "kind": "functionCall",
                           "lValueRequested": false,
-                          "nameLocations": [],
                           "names": [],
                           "nodeType": "FunctionCall",
                           "src": "5305:29:8",
@@ -4495,9 +4433,6 @@
                     "pathNode": {
                       "id": 1463,
                       "name": "buffer",
-                      "nameLocations": [
-                        "5173:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "5173:6:8"
@@ -4593,9 +4528,6 @@
                     "pathNode": {
                       "id": 1471,
                       "name": "buffer",
-                      "nameLocations": [
-                        "5251:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "5251:6:8"
@@ -4658,7 +4590,6 @@
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberLocation": "6163:3:8",
                           "memberName": "buf",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": 1201,
@@ -4673,7 +4604,6 @@
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "6167:6:8",
                         "memberName": "length",
                         "nodeType": "MemberAccess",
                         "src": "6159:14:8",
@@ -4727,7 +4657,6 @@
                     "isPure": false,
                     "kind": "functionCall",
                     "lValueRequested": false,
-                    "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
                     "src": "6143:37:8",
@@ -4782,9 +4711,6 @@
                     "pathNode": {
                       "id": 1495,
                       "name": "buffer",
-                      "nameLocations": [
-                        "6061:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "6061:6:8"
@@ -4853,9 +4779,6 @@
                     "pathNode": {
                       "id": 1501,
                       "name": "buffer",
-                      "nameLocations": [
-                        "6115:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "6115:6:8"
@@ -4957,7 +4880,6 @@
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "6703:8:8",
                       "memberName": "capacity",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 1203,
@@ -5117,7 +5039,6 @@
                           "isPure": false,
                           "kind": "functionCall",
                           "lValueRequested": false,
-                          "nameLocations": [],
                           "names": [],
                           "nodeType": "FunctionCall",
                           "src": "6721:28:8",
@@ -5837,9 +5758,6 @@
                     "pathNode": {
                       "id": 1516,
                       "name": "buffer",
-                      "nameLocations": [
-                        "6566:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "6566:6:8"
@@ -5962,9 +5880,6 @@
                     "pathNode": {
                       "id": 1526,
                       "name": "buffer",
-                      "nameLocations": [
-                        "6662:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "6662:6:8"
@@ -6067,7 +5982,6 @@
                         "isPure": false,
                         "kind": "typeConversion",
                         "lValueRequested": false,
-                        "nameLocations": [],
                         "names": [],
                         "nodeType": "FunctionCall",
                         "src": "7775:13:8",
@@ -6133,7 +6047,6 @@
                     "isPure": false,
                     "kind": "functionCall",
                     "lValueRequested": false,
-                    "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
                     "src": "7759:34:8",
@@ -6188,9 +6101,6 @@
                     "pathNode": {
                       "id": 1576,
                       "name": "buffer",
-                      "nameLocations": [
-                        "7651:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "7651:6:8"
@@ -6286,9 +6196,6 @@
                     "pathNode": {
                       "id": 1584,
                       "name": "buffer",
-                      "nameLocations": [
-                        "7731:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "7731:6:8"
@@ -6351,7 +6258,6 @@
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberLocation": "8177:3:8",
                           "memberName": "buf",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": 1201,
@@ -6366,7 +6272,6 @@
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "8181:6:8",
                         "memberName": "length",
                         "nodeType": "MemberAccess",
                         "src": "8173:14:8",
@@ -6422,7 +6327,6 @@
                         "isPure": false,
                         "kind": "typeConversion",
                         "lValueRequested": false,
-                        "nameLocations": [],
                         "names": [],
                         "nodeType": "FunctionCall",
                         "src": "8189:13:8",
@@ -6488,7 +6392,6 @@
                     "isPure": false,
                     "kind": "functionCall",
                     "lValueRequested": false,
-                    "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
                     "src": "8162:45:8",
@@ -6543,9 +6446,6 @@
                     "pathNode": {
                       "id": 1601,
                       "name": "buffer",
-                      "nameLocations": [
-                        "8078:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "8078:6:8"
@@ -6614,9 +6514,6 @@
                     "pathNode": {
                       "id": 1607,
                       "name": "buffer",
-                      "nameLocations": [
-                        "8134:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "8134:6:8"
@@ -6679,7 +6576,6 @@
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberLocation": "8590:3:8",
                           "memberName": "buf",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": 1201,
@@ -6694,7 +6590,6 @@
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "8594:6:8",
                         "memberName": "length",
                         "nodeType": "MemberAccess",
                         "src": "8586:14:8",
@@ -6771,7 +6666,6 @@
                     "isPure": false,
                     "kind": "functionCall",
                     "lValueRequested": false,
-                    "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
                     "src": "8575:36:8",
@@ -6826,9 +6720,6 @@
                     "pathNode": {
                       "id": 1626,
                       "name": "buffer",
-                      "nameLocations": [
-                        "8491:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "8491:6:8"
@@ -6897,9 +6788,6 @@
                     "pathNode": {
                       "id": 1632,
                       "name": "buffer",
-                      "nameLocations": [
-                        "8547:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "8547:6:8"
@@ -7001,7 +6889,6 @@
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "9134:8:8",
                       "memberName": "capacity",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 1203,
@@ -7161,7 +7048,6 @@
                           "isPure": false,
                           "kind": "functionCall",
                           "lValueRequested": false,
-                          "nameLocations": [],
                           "names": [],
                           "nodeType": "FunctionCall",
                           "src": "9152:28:8",
@@ -7701,9 +7587,6 @@
                     "pathNode": {
                       "id": 1648,
                       "name": "buffer",
-                      "nameLocations": [
-                        "8997:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "8997:6:8"
@@ -7826,9 +7709,6 @@
                     "pathNode": {
                       "id": 1658,
                       "name": "buffer",
-                      "nameLocations": [
-                        "9093:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "9093:6:8"
@@ -7891,7 +7771,6 @@
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberLocation": "10044:3:8",
                           "memberName": "buf",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": 1201,
@@ -7906,7 +7785,6 @@
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "10048:6:8",
                         "memberName": "length",
                         "nodeType": "MemberAccess",
                         "src": "10040:14:8",
@@ -7976,7 +7854,6 @@
                     "isPure": false,
                     "kind": "functionCall",
                     "lValueRequested": false,
-                    "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
                     "src": "10026:40:8",
@@ -8031,9 +7908,6 @@
                     "pathNode": {
                       "id": 1695,
                       "name": "buffer",
-                      "nameLocations": [
-                        "9918:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "9918:6:8"
@@ -8129,9 +8003,6 @@
                     "pathNode": {
                       "id": 1703,
                       "name": "buffer",
-                      "nameLocations": [
-                        "9998:6:8"
-                      ],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 1204,
                       "src": "9998:6:8"
@@ -8164,11 +8035,11 @@
   },
   "compiler": {
     "name": "solc",
-    "version": "0.8.17+commit.8df45f5f.Emscripten.clang"
+    "version": "0.8.13+commit.abaa5c0e.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.9",
-  "updatedAt": "2022-12-02T08:08:56.882Z",
+  "schemaVersion": "3.4.13",
+  "updatedAt": "2023-11-12T14:58:23.431Z",
   "devdoc": {
     "details": "A library for working with mutable byte buffers in Solidity. Byte buffers are mutable and expandable, and provide a variety of primitives for writing to them. At any time you can fetch a bytes object containing the current contents of the buffer. The bytes object should not be stored between operations, as it may change due to resizing of the buffer.",
     "kind": "dev",

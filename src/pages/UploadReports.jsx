@@ -42,7 +42,7 @@ const UploadReports = () => {
   }
 
   const ipfsClient = async () => {
-    const ipfs = create(new URL('http://127.0.0.1:5002/'))
+    const ipfs = create(new URL('http://127.0.0.1:5001/'))
     return ipfs
   }
 
