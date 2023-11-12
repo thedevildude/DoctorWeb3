@@ -9,6 +9,7 @@ const FindDoctors = () => {
 
   useEffect(() => {
     const findDHDetails = async () => {
+      if (isLoading || !isConnected) return;
       const doctorAddress = await doctorWeb3.findDoctors();
       const detailArray = [];
       for (let i = 0; i < (await doctorAddress.length); i++) {
@@ -22,7 +23,7 @@ const FindDoctors = () => {
       setDoctorDetails(detailArray);
     };
     findDHDetails();
-  }, [doctorWeb3]);
+  }, [doctorWeb3, isConnected, isLoading]);
 
   return (
     <div className="findDH">
