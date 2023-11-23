@@ -46,7 +46,7 @@ const MyReports = () => {
                   <p className="filehash-box-title">FileHash</p>
                   <p className="filehash-box-filehash">
                     <a
-                      href={`http://127.0.0.1:9090/ipfs/${item[0]}`}
+                      href={`http://127.0.0.1:8080/ipfs/${item[0]}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
