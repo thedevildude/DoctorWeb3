@@ -73,7 +73,7 @@ const UploadReports = () => {
 
   return (
     <div className="upload-reports">
-      <h1 className="upload-reports-form-title">Upload Reports</h1>
+      <h1 className="text-3xl my-8 font-medium">Upload Reports</h1>
       <div className="upload-reports-form-container">
         {isLoading || !isConnected ? (
           <ColorRing

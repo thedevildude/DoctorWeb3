@@ -26,7 +26,7 @@ const MyReports = () => {
 
   return (
     <div className="my-reports">
-      <h1 className="my-reports-title">My Reports</h1>
+      <h1 className="text-3xl mt-8 font-medium">My Reports</h1>
       <div className="reports-box">
         {isLoading || !isConnected || reportsLoading ? (
           <ColorRing

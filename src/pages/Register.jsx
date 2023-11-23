@@ -74,7 +74,7 @@ const Register = () => {
         </div>
       ) : (
         <div className="registration-form">
-          <h1 className="form-title">Register</h1>
+          <h1 className="text-3xl mb-8 font-medium">Register</h1>
           <form>
             <div className="container">
               <div className="form-item">

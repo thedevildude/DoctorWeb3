@@ -27,7 +27,7 @@ const FindDoctors = () => {
 
   return (
     <div className="findDH">
-      <h1 className="findDH-title">Registered Doctors</h1>
+      <h1 className="text-3xl mt-8 font-medium">Registered Doctors</h1>
       <div className="findDH-cards">
         {isLoading || !isConnected ? (
           <ColorRing

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
-import * as MdIcons from "react-icons/md";
 import * as FaIcons from "react-icons/fa";
 import * as IoIcons from "react-icons/io";
 import { IconContext } from "react-icons";
@@ -52,10 +51,7 @@ const Home = () => {
       <IconContext.Provider value={{ size: 50, color: "#fff" }}>
         <div className="home">
           <div className="home-title">
-            <h1>
-              <MdIcons.MdOutlineHealthAndSafety />
-              DoctorWeb3
-            </h1>
+            <h1 className="text-4xl mt-8 font-bold">DoctorWeb3</h1>
           </div>
           <div className="text-container">
             <p>

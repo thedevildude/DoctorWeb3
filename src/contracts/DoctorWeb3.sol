@@ -29,10 +29,13 @@ contract DoctorWeb3 is ChainlinkClient {
         fee = 0.1 * 10 ** 18; // 0.1 LINK
         _value = "hello";
         requestId = 1;
-
     }
-    event ValueChanged(address indexed author, string oldValue, string newValue);
 
+    event ValueChanged(
+        address indexed author,
+        string oldValue,
+        string newValue
+    );
 
     struct PatientInfo {
         address patient;
@@ -48,6 +51,13 @@ contract DoctorWeb3 is ChainlinkClient {
         string category;
         address Patient;
         PatientInfo patientInfo;
+    }
+
+    struct SharedReport {
+        string fileHash;
+        address Patient;
+        address recipient;
+        string secretMessage;
     }
 
     struct Applicant {
@@ -73,6 +83,8 @@ contract DoctorWeb3 is ChainlinkClient {
     mapping(address => AuthorizedDHDetails) public AuthorizedDH; // Maps address of authorized Doctor or hospital with their details
     mapping(address => bool) public AuthorisedHospital;
     mapping(address => bool) public AuthorisedDoctor;
+    mapping(address => bytes32[]) private recipientSharedReports; // Mapping to store an array of shared report IDs for each recipient
+    mapping(bytes32 => SharedReport) public SharedReports; // Maps report unique value from IPFS to Report Datatype
 
     event AuthorizationResult(
         address applicantAddress,
@@ -94,12 +106,16 @@ contract DoctorWeb3 is ChainlinkClient {
         uint AuthOnDate
     );
 
-    event ReportUploaded(
+    event ReportUploaded(string fileHash, string category);
+
+    event ReportShared(
         string fileHash,
-        string category
+        address Patient,
+        address recipient,
+        string secretMessage
     );
 
-    function getValue() view public returns (string memory) {
+    function getValue() public view returns (string memory) {
         return _value;
     }
 
@@ -113,23 +129,18 @@ contract DoctorWeb3 is ChainlinkClient {
     }
 
     event Received(address, uint);
+
     receive() external payable {
         emit Received(msg.sender, msg.value);
     }
 
-    function getPatientReports()
-        public
-        view
-        returns (string[] memory)
-    {
+    function getPatientReports() public view returns (string[] memory) {
         return PatientReports[msg.sender];
     }
 
-    function getDetailedReports(string memory _fileHash)
-        public
-        view
-        returns (Report memory)
-    {
+    function getDetailedReports(
+        string memory _fileHash
+    ) public view returns (Report memory) {
         return Reports[_fileHash];
     }
 
@@ -141,7 +152,9 @@ contract DoctorWeb3 is ChainlinkClient {
         return Hospitals;
     }
 
-    function getAuthorizedDHDetails(address _addr) public view returns (address, string memory, string memory) {
+    function getAuthorizedDHDetails(
+        address _addr
+    ) public view returns (address, string memory, string memory) {
         string memory _name = AuthorizedDH[_addr].name;
         address _address = AuthorizedDH[_addr].authorizedDHAddress;
         string memory _medicalId = AuthorizedDH[_addr].medicalId;
@@ -221,22 +234,25 @@ contract DoctorWeb3 is ChainlinkClient {
         Applicant memory applicant = Applicants[requestId];
 
         if (applicant.applicantType == 0) {
-                addAuthorizedDoctor(
-                    applicant.applicantAddress,
-                    applicant.name,
-                    applicant.medicalId
-                );
-            } else if (applicant.applicantType == 1)  {
-                addAuthorizedHospital(
-                    applicant.applicantAddress,
-                    applicant.name,
-                    applicant.medicalId
-                );
-            }
+            addAuthorizedDoctor(
+                applicant.applicantAddress,
+                applicant.name,
+                applicant.medicalId
+            );
+        } else if (applicant.applicantType == 1) {
+            addAuthorizedHospital(
+                applicant.applicantAddress,
+                applicant.name,
+                applicant.medicalId
+            );
+        }
         requestId = requestId + 1;
-        emit AuthorizationResult(applicant.applicantAddress, applicant.medicalId, true);
+        emit AuthorizationResult(
+            applicant.applicantAddress,
+            applicant.medicalId,
+            true
+        );
         medicalIdUsed[applicant.medicalId] = true;
-
     }
 
     function addAuthorizedDoctor(
@@ -276,7 +292,12 @@ contract DoctorWeb3 is ChainlinkClient {
 
         AuthorizedDH[_authAddress] = _authorizedDHDetail;
 
-        emit HospitalAuthorized(_name, _authAddress, _medicalId, block.timestamp);
+        emit HospitalAuthorized(
+            _name,
+            _authAddress,
+            _medicalId,
+            block.timestamp
+        );
     }
 
     function uploadReport(
@@ -309,4 +330,35 @@ contract DoctorWeb3 is ChainlinkClient {
         emit ReportUploaded(_fileHash, _category);
     }
 
+    function shareReport(
+        string memory _fileHash,
+        address _recipient,
+        string memory _secretMessage
+    ) public {
+        require(
+            msg.sender == Reports[_fileHash].Patient,
+            "Only Patient can share the report"
+        );
+        require(
+            AuthorisedDoctor[_recipient] || AuthorisedHospital[_recipient],
+            "Doctor/Hospital is not authorized"
+        );
+        bytes32 sharedReportId = keccak256(
+            abi.encodePacked(_fileHash, _recipient)
+        );
+        SharedReports[sharedReportId] = SharedReport({
+            fileHash: _fileHash,
+            Patient: msg.sender,
+            recipient: _recipient,
+            secretMessage: _secretMessage
+        });
+        // Store the shared report ID for the recipient
+        recipientSharedReports[_recipient].push(sharedReportId);
+        // Emit an event to notify the parties involved
+        emit ReportShared(_fileHash, msg.sender, _recipient, _secretMessage);
+    }
+
+    function getSharedReportIds() public view returns (bytes32[] memory) {
+        return recipientSharedReports[msg.sender];
+    }
 }
