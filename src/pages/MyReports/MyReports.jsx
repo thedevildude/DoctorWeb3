@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useContextState } from "../context/context";
-import "../css/MyReports.css";
+import { useContextState } from "../../context/context";
+import ShareReportModal from "./ShareReportModal";
+import "../../css/MyReports.css";
 import { ColorRing } from "react-loader-spinner";
 
 const MyReports = () => {
@@ -60,6 +61,7 @@ const MyReports = () => {
           })
         )}
       </div>
+      <ShareReportModal openModal={false} />
     </div>
   );
 };

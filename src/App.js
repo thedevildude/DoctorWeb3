@@ -3,11 +3,11 @@ import "./App.css";
 import Sidebar from "./components/Sidebar";
 //import {ContractProvider} from './ContractContext';
 import Home from "./pages/Home";
-import MyReports from "./pages/MyReports";
-import UploadReports from "./pages/UploadReports";
-import FindHospitals from "./pages/FindHospitals";
-import FindDoctors from "./pages/FindDoctors";
-import Register from "./pages/Register";
+import MyReports from "./pages/MyReports/MyReports";
+import UploadReports from "./pages/UploadReports/UploadReports";
+import FindHospitals from "./pages/FindHospitals/FindHospitals";
+import FindDoctors from "./pages/FindDoctors/FindDoctors";
+import Register from "./pages/Register/Register";
 import ComponentTest from "./pages/ComponentTest";
 import { Provider } from "./context/context";
 

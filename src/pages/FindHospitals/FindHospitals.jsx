@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { useContextState } from "../context/context";
-import "../css/findDoctorHospital.css";
+import { useContextState } from "../../context/context";
+import "../../css/findDoctorHospital.css";
 import { ColorRing } from "react-loader-spinner";
 
-const FindDoctors = () => {
+const FindHospitals = () => {
   const { isLoading, isConnected, doctorWeb3 } = useContextState();
   const [doctorDetails, setDoctorDetails] = useState([]);
 
   useEffect(() => {
     const findDHDetails = async () => {
       if (isLoading || !isConnected) return;
-      const doctorAddress = await doctorWeb3.findDoctors();
+      const doctorAddress = await doctorWeb3.findHospitals();
       const detailArray = [];
       for (let i = 0; i < (await doctorAddress.length); i++) {
         let helpObject = {};
@@ -27,7 +27,7 @@ const FindDoctors = () => {
 
   return (
     <div className="findDH">
-      <h1 className="text-3xl mt-8 font-medium">Registered Doctors</h1>
+      <h1 className="text-3xl mt-8 font-medium">Registered Hospitals</h1>
       <div className="findDH-cards">
         {isLoading || !isConnected ? (
           <ColorRing
@@ -59,4 +59,4 @@ const FindDoctors = () => {
   );
 };
 
-export default FindDoctors;
+export default FindHospitals;

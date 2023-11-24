@@ -1,6 +1,6 @@
-import "../css/Register.css";
+import "../../css/Register.css";
 import { useState } from "react";
-import { useContextState } from "../context/context";
+import { useContextState } from "../../context/context";
 import { ColorRing } from "react-loader-spinner";
 
 const useRadioButtons = (name) => {
