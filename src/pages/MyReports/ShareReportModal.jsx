@@ -1,8 +1,12 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 const ShowReportModal = (props) => {
-  const [isOpen, setIsOpen] = useState(props.openModal);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setIsOpen(props.openModal);
+  }, [props.openModal]);
 
   const closeModal = () => {
     setIsOpen(false);
