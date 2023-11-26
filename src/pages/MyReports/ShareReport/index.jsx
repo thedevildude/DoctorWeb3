@@ -1,15 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const ShowReportModal = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    setIsOpen(props.openModal);
-  }, [props.openModal]);
+const ShareReport = (props) => {
+  const [isOpen, setIsOpen] = useState(true);
+  const navigate = useNavigate();
 
   const closeModal = () => {
     setIsOpen(false);
+    navigate("../");
   };
 
   return (
@@ -56,4 +55,4 @@ const ShowReportModal = (props) => {
   );
 };
 
-export default ShowReportModal;
+export default ShareReport;

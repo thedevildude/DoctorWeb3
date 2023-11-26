@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import { SidebarData } from "./SidebarData";
+import { SidebarData } from "../SidebarData";
 import "./Sidebar.css";
 import { IconContext } from "react-icons";
-import { useContextState, useContextDispatch } from "../context/context";
-import { connect } from "../context/actions";
+import { useContextState, useContextDispatch } from "../../context/context";
+import { connect } from "../../context/actions";
 
 const Sidebar = () => {
   const { address, isLoading, isConnected, errorMessage } = useContextState();
