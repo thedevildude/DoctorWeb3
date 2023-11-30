@@ -1,10 +1,17 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import SwitchInput from "../../../components/SwitchInput";
 
-const ShareReport = (props) => {
+const ShareReport = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const [form, setForm] = useState({
+    password: "",
+    recipient: "",
+  });
+  const userType = [{ name: "Doctor" }, { name: "Hospital" }];
   const navigate = useNavigate();
+  const { filehash } = useParams();
 
   const closeModal = () => {
     setIsOpen(false);
@@ -45,8 +52,25 @@ const ShareReport = (props) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="inline-block w-full max-w-3xl p-6 my-8 text-left align-middle transition-all transform bg-white rounded-2xl shadow-xl">
-              <p>Hello</p>
+            <div className="w-full inline-block max-w-3xl p-6 my-8 text-left align-middle transition-all transform bg-white rounded-2xl shadow-xl">
+              <h2 className="text-xl font-medium">Share</h2>
+              <input
+                type="text"
+                value={filehash}
+                readOnly
+                disabled
+                className="w-full p-2 mt-6 rounded-md border-2 border-gray-200 text-gray-400"
+              />
+              <input
+                type="password"
+                placeholder="Enter password to file"
+                value={form.password}
+                onChange={(e) => {
+                  setForm({ ...form, password: e.target.value });
+                }}
+                className="w-full p-2 mt-6 rounded-md border-2 border-gray-300 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+              />
+              <SwitchInput options={userType} />
             </div>
           </Transition.Child>
         </div>

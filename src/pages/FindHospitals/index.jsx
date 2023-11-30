@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useContextState } from "../../context/context";
+import { useContextState } from "../../context/application/context";
 import "../../css/findDoctorHospital.css";
 import { ColorRing } from "react-loader-spinner";
 

@@ -5,7 +5,7 @@ import * as IoIcons from "react-icons/io";
 import { IconContext } from "react-icons";
 import "../css/Web3card.css";
 import { useNavigate } from "react-router-dom";
-import { useContextState } from "../context/context";
+import { useContextState } from "../context/application/context";
 
 const Home = () => {
   const { isLoading, isConnected, signer, doctorWeb3 } = useContextState();

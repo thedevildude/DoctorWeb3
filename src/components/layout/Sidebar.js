@@ -5,8 +5,11 @@ import * as AiIcons from "react-icons/ai";
 import { SidebarData } from "../SidebarData";
 import "./Sidebar.css";
 import { IconContext } from "react-icons";
-import { useContextState, useContextDispatch } from "../../context/context";
-import { connect } from "../../context/actions";
+import {
+  useContextState,
+  useContextDispatch,
+} from "../../context/application/context";
+import { connect } from "../../context/application/actions";
 
 const Sidebar = () => {
   const { address, isLoading, isConnected, errorMessage } = useContextState();

@@ -2,7 +2,7 @@ import "../../css/UploadReports.css";
 import { useState, useRef } from "react";
 import { create } from "ipfs-http-client";
 import { ColorRing } from "react-loader-spinner";
-import { useContextState } from "../../context/context";
+import { useContextState } from "../../context/application/context";
 
 const UploadReports = () => {
   const { isLoading, isConnected, doctorWeb3 } = useContextState();

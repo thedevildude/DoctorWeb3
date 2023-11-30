@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { FormatTypes, Interface } from "ethers/lib/utils";
-import DoctorWeb3 from "../abis/DoctorWeb3.json";
+import DoctorWeb3 from "../../abis/DoctorWeb3.json";
 
 const formatInterface = async () => {
   let iface = new Interface(DoctorWeb3.abi);
