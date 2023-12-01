@@ -1,7 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import SwitchInput from "../../../components/SwitchInput";
+import { useContextState } from "../../../context/application/context";
 
 const ShareReport = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -9,13 +10,57 @@ const ShareReport = () => {
     password: "",
     recipient: "",
   });
-  const userType = [{ name: "Doctor" }, { name: "Hospital" }];
+  const [userType, setUserType] = useState(false);
+  const [list, setList] = useState([]); // [[address, name, id], ...]
+  const { isLoading, isConnected, doctorWeb3 } = useContextState();
   const navigate = useNavigate();
   const { filehash } = useParams();
 
   const closeModal = () => {
     setIsOpen(false);
     navigate("../");
+  };
+
+  useEffect(() => {
+    if (!isConnected || isLoading) {
+      navigate("../");
+    }
+  }, [isConnected, isLoading, navigate]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!doctorWeb3) return;
+      if (!userType) {
+        const doctorList = await doctorWeb3.findDoctors();
+        const doctorDetails = await Promise.all(
+          doctorList.map(async (doctorAddress) => {
+            return await doctorWeb3.getAuthorizedDHDetails(doctorAddress);
+          })
+        );
+        setList(doctorDetails);
+      } else {
+        const hospitalList = await doctorWeb3.findHospitals();
+        const hospitalDetails = await Promise.all(
+          hospitalList.map(async (hospitalAddress) => {
+            return await doctorWeb3.getAuthorizedDHDetails(hospitalAddress);
+          })
+        );
+        setList(hospitalDetails);
+      }
+    };
+    fetchData();
+  }, [doctorWeb3, userType]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const tx = await doctorWeb3.shareReport(
+      filehash,
+      form.recipient,
+      form.password
+    );
+    await tx.wait();
+    alert("Report shared successfully!");
+    closeModal();
   };
 
   return (
@@ -70,7 +115,36 @@ const ShareReport = () => {
                 }}
                 className="w-full p-2 mt-6 rounded-md border-2 border-gray-300 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />
-              <SwitchInput options={userType} />
+              <div className="mt-6">
+                <SwitchInput enabled={userType} setEnabled={setUserType} />
+              </div>
+              <p className="mt-6 mb-2 text-gray-500">
+                {userType ? "Select a Hospital" : "Select a Doctor"}
+              </p>
+              <select
+                defaultValue={
+                  userType ? "Choose a hospital" : "Choose a doctor"
+                }
+                onChange={(e) => {
+                  setForm({ ...form, recipient: e.target.value });
+                }}
+                className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-md rounded-lg focus:outline-none  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              >
+                <option>
+                  {userType ? "Choose a hospital" : "Choose a doctor"}
+                </option>
+                {list.map((details) => (
+                  <option key={details[0]} value={details[0]}>
+                    {details[1]} ({details[0]})
+                  </option>
+                ))}
+              </select>
+              <button
+                className="block mt-6 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
             </div>
           </Transition.Child>
         </div>

@@ -361,4 +361,16 @@ contract DoctorWeb3 is ChainlinkClient {
     function getSharedReportIds() public view returns (bytes32[] memory) {
         return recipientSharedReports[msg.sender];
     }
+
+    function getSharedReport(
+        bytes32 _sharedReportId
+    ) public view returns (string memory, address, address, string memory) {
+        SharedReport memory sharedReport = SharedReports[_sharedReportId];
+        return (
+            sharedReport.fileHash,
+            sharedReport.Patient,
+            sharedReport.recipient,
+            sharedReport.secretMessage
+        );
+    }
 }
