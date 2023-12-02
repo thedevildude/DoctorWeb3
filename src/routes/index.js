@@ -7,6 +7,7 @@ import FindDoctors from "../pages/FindDoctors";
 import FindHospitals from "../pages/FindHospitals";
 import Register from "../pages/Register";
 import ShareReport from "../pages/MyReports/ShareReport";
+import PatientReports from "../pages/PatientReports";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/patient-reports",
+        element: <PatientReports />,
       },
     ],
   },

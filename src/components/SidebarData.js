@@ -39,4 +39,10 @@ export const SidebarData = [
     icon: <FaIcons.FaUser />,
     cName: "nav-text",
   },
+  {
+    title: "Receive Reports",
+    path: "/patient-reports",
+    icon: <FaIcons.FaFileMedical />,
+    cName: "nav-text",
+  },
 ];

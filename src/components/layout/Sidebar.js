@@ -29,7 +29,7 @@ const Sidebar = () => {
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
-        <div className="sidebar">
+        <div className="bg-[#00073D] h-20 text-white flex items-center justify-between">
           <Link path="#" className="menu-bars">
             <div onClick={showNavbar}>
               {!navbar ? <FaIcons.FaBars /> : <AiIcons.AiOutlineClose />}
