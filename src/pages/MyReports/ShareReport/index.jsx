@@ -7,12 +7,12 @@ import { useContextState } from "../../../context/application/context";
 const ShareReport = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [form, setForm] = useState({
-    password: "",
+    notes: "",
     recipient: "",
   });
   const [userType, setUserType] = useState(false);
   const [list, setList] = useState([]); // [[address, name, id], ...]
-  const { isLoading, isConnected, doctorWeb3 } = useContextState();
+  const { isLoading, isConnected, doctorWeb3, signer } = useContextState();
   const navigate = useNavigate();
   const { filehash } = useParams();
 
@@ -53,10 +53,12 @@ const ShareReport = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const signedMessage = await signer.signMessage(form.notes);
+    console.log(signedMessage);
     const tx = await doctorWeb3.shareReport(
       filehash,
       form.recipient,
-      form.password
+      form.notes
     );
     await tx.wait();
     alert("Report shared successfully!");
@@ -107,11 +109,11 @@ const ShareReport = () => {
                 className="w-full p-2 mt-6 rounded-md border-2 border-gray-200 text-gray-400"
               />
               <input
-                type="password"
-                placeholder="Enter password to file"
-                value={form.password}
+                type="text"
+                placeholder="Enter notes to file"
+                value={form.notes}
                 onChange={(e) => {
-                  setForm({ ...form, password: e.target.value });
+                  setForm({ ...form, notes: e.target.value });
                 }}
                 className="w-full p-2 mt-6 rounded-md border-2 border-gray-300 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />

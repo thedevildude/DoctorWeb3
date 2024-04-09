@@ -16,7 +16,7 @@ export const connect = async (dispatch) => {
     if (!window.ethereum) {
       throw new Error("No crypto wallet found. Please install metamask");
     }
-    const provider = await new ethers.providers.Web3Provider(window.ethereum);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
     const address = await signer.getAddress();
@@ -41,6 +41,7 @@ export const connect = async (dispatch) => {
       },
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: "CONNECT_WALLET_FAILURE",
       payload: {
