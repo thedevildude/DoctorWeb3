@@ -373,4 +373,11 @@ contract DoctorWeb3 is ChainlinkClient {
             sharedReport.secretMessage
         );
     }
+
+    /* function shareReportResponse(
+        string memory notes,
+        string memory fileHash
+    ) public pure {
+        return;
+    } */
 }

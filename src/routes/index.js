@@ -8,6 +8,7 @@ import FindHospitals from "../pages/FindHospitals";
 import Register from "../pages/Register";
 import ShareReport from "../pages/MyReports/ShareReport";
 import PatientReports from "../pages/PatientReports";
+import ReadReport from "../pages/PatientReports/ReadReport";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,12 @@ const router = createBrowserRouter([
       {
         path: "/patient-reports",
         element: <PatientReports />,
+        children: [
+          {
+            path: "/patient-reports/:reportId",
+            element: <ReadReport />,
+          },
+        ],
       },
     ],
   },
