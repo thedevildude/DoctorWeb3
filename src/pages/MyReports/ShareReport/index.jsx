@@ -3,6 +3,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import SwitchInput from "../../../components/SwitchInput";
 import { useContextState } from "../../../context/application/context";
+import ReportResponse from "./ReportResponse";
 
 const ShareReport = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -100,53 +101,59 @@ const ShareReport = () => {
             leaveTo="opacity-0 scale-95"
           >
             <div className="w-full inline-block max-w-3xl p-6 my-8 text-left align-middle transition-all transform bg-white rounded-2xl shadow-xl">
-              <h2 className="text-xl font-medium">Share</h2>
-              <input
-                type="text"
-                value={filehash}
-                readOnly
-                disabled
-                className="w-full p-2 mt-6 rounded-md border-2 border-gray-200 text-gray-400"
-              />
-              <input
-                type="text"
-                placeholder="Enter notes to file"
-                value={form.notes}
-                onChange={(e) => {
-                  setForm({ ...form, notes: e.target.value });
-                }}
-                className="w-full p-2 mt-6 rounded-md border-2 border-gray-300 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-              />
-              <div className="mt-6">
-                <SwitchInput enabled={userType} setEnabled={setUserType} />
-              </div>
-              <p className="mt-6 mb-2 text-gray-500">
-                {userType ? "Select a Hospital" : "Select a Doctor"}
-              </p>
-              <select
-                defaultValue={
-                  userType ? "Choose a hospital" : "Choose a doctor"
-                }
-                onChange={(e) => {
-                  setForm({ ...form, recipient: e.target.value });
-                }}
-                className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-md rounded-lg focus:outline-none  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              >
-                <option>
-                  {userType ? "Choose a hospital" : "Choose a doctor"}
-                </option>
-                {list.map((details) => (
-                  <option key={details[0]} value={details[0]}>
-                    {details[1]} ({details[0]})
+              <div className="flex flex-col">
+                <h2 className="text-xl font-medium">Share</h2>
+                <input
+                  type="text"
+                  value={filehash}
+                  readOnly
+                  disabled
+                  className="w-full p-2 mt-6 rounded-md border-2 border-gray-200 text-gray-400"
+                />
+                <input
+                  type="text"
+                  placeholder="Enter notes to file"
+                  value={form.notes}
+                  onChange={(e) => {
+                    setForm({ ...form, notes: e.target.value });
+                  }}
+                  className="w-full p-2 mt-6 rounded-md border-2 border-gray-300 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                />
+                <div className="mt-6">
+                  <SwitchInput enabled={userType} setEnabled={setUserType} />
+                </div>
+                <p className="mt-6 mb-2 text-gray-500">
+                  {userType ? "Select a Hospital" : "Select a Doctor"}
+                </p>
+                <select
+                  defaultValue={
+                    userType ? "Choose a hospital" : "Choose a doctor"
+                  }
+                  onChange={(e) => {
+                    setForm({ ...form, recipient: e.target.value });
+                  }}
+                  className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-md rounded-lg focus:outline-none  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                >
+                  <option>
+                    {userType ? "Choose a hospital" : "Choose a doctor"}
                   </option>
-                ))}
-              </select>
-              <button
-                className="block mt-6 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-                onClick={handleSubmit}
-              >
-                Submit
-              </button>
+                  {list.map((details) => (
+                    <option key={details[0]} value={details[0]}>
+                      {details[1]} ({details[0]})
+                    </option>
+                  ))}
+                </select>
+                <button
+                  className="block mt-6 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </button>
+              </div>
+              <p className="text-xl font-medium mt-5">Responses</p>
+              <div className="flex flex-col w-ful border p-2 mt-5">
+                <ReportResponse filehash={filehash} doctorWeb3={doctorWeb3} />
+              </div>
             </div>
           </Transition.Child>
         </div>

@@ -76,7 +76,7 @@ const Home = () => {
           </div>
           <button
             className="button-18"
-            onClick={() => navigate("/uploadreports")}
+            onClick={() => navigate("/upload-reports")}
           >
             Upload Reports
           </button>

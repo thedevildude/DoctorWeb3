@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chainlink/contracts": "^0.5.1",
+    "@chainlink/contracts": "^1.1.0",
     "@headlessui/react": "^1.7.17",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

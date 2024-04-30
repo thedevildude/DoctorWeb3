@@ -46,6 +46,7 @@ const Register = () => {
         state.medicalId,
         medicalValue
       );
+      console.log(await doctorWeb3.getRes());
       await tx.wait();
       window.alert(`Registered`);
       setIsRegistering(false);

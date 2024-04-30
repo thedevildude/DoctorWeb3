@@ -10,32 +10,26 @@ pragma solidity ^0.8.0;
 // [ ] 7  - Reviews Doctor/Hospital on receiving the report
 // [X] 8  - Find authorized Doctor/Hospital
 
-import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
+import {Chainlink, ChainlinkClient} from "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
+import {ConfirmedOwner} from "@chainlink/contracts/src/v0.8/shared/access/ConfirmedOwner.sol";
+import {LinkTokenInterface} from "@chainlink/contracts/src/v0.8/shared/interfaces/LinkTokenInterface.sol";
 
-contract DoctorWeb3 is ChainlinkClient {
+contract DoctorWeb3 is ChainlinkClient, ConfirmedOwner {
     using Chainlink for Chainlink.Request;
-    address owner;
     address private oracle;
     bytes32 private jobId;
     uint256 private fee;
-    string _value;
+    bool private res;
     uint256 requestId;
 
-    constructor() {
-        owner = msg.sender;
-        setChainlinkToken(0x326C977E6efc84E512bB9C30f76E30c160eD06FB);
-        oracle = 0x40193c8518BB267228Fc409a613bDbD8eC5a97b3;
-        jobId = "ca98366cc7314957b8c012c72f05aeeb";
+    constructor() ConfirmedOwner(msg.sender) {
+        _setChainlinkToken(0x84b9B910527Ad5C03A9Ca831909E21e236EA7b06);
+        _setChainlinkOracle(0xCC79157eb46F5624204f47AB42b3906cAA40eaB7);
+        jobId = "c1c5e92880894eb6b27d3cae19670aa3";
         fee = 0.1 * 10 ** 18; // 0.1 LINK
-        _value = "hello";
         requestId = 1;
+        res = false;
     }
-
-    event ValueChanged(
-        address indexed author,
-        string oldValue,
-        string newValue
-    );
 
     struct PatientInfo {
         address patient;
@@ -73,6 +67,12 @@ contract DoctorWeb3 is ChainlinkClient {
         string medicalId;
     }
 
+    struct dhResponse {
+        address sender;
+        address receiver;
+        string response;
+    }
+
     address[] Doctors;
     address[] Hospitals;
     mapping(address => string[]) public PatientReports; // Maps Patient's address to its reports
@@ -85,6 +85,7 @@ contract DoctorWeb3 is ChainlinkClient {
     mapping(address => bool) public AuthorisedDoctor;
     mapping(address => bytes32[]) private recipientSharedReports; // Mapping to store an array of shared report IDs for each recipient
     mapping(bytes32 => SharedReport) public SharedReports; // Maps report unique value from IPFS to Report Datatype
+    mapping(string => dhResponse[]) public DoctorHospitalResponse;
 
     event AuthorizationResult(
         address applicantAddress,
@@ -115,18 +116,12 @@ contract DoctorWeb3 is ChainlinkClient {
         string secretMessage
     );
 
-    function getValue() public view returns (string memory) {
-        return _value;
-    }
-
-    function setValue(string memory value) public {
-        emit ValueChanged(msg.sender, _value, value);
-        _value = value;
-    }
-
-    function testFunction() public pure returns (string memory myString) {
-        return "Hello! The Contract is connected with web3";
-    }
+    event dhResponseEvent(
+        address sender,
+        address receiver,
+        string response,
+        string filehash
+    );
 
     event Received(address, uint);
 
@@ -161,25 +156,24 @@ contract DoctorWeb3 is ChainlinkClient {
         return (_address, _name, _medicalId);
     }
 
-    /* function ApplyForVerification(
+    function request(
         string memory _name,
         address _applicantAddress,
         string memory _medicalId,
         uint256 _applicantType
-    ) public returns (bytes32 requestId) {
-        require(_applicantType == 1 || _applicantType == 0,"Apply id should be either 0 or 1");
-        require(!medicalIdUsed[_medicalId], "Medical ID is already used"); // Stopping function spamming
+    ) public returns (bytes32 _requestId) {
+        Chainlink.Request memory req = _buildChainlinkRequest(
+            jobId,
+            address(this),
+            this.fulfill.selector
+        );
+        req._add(
+            "get",
+            "https://run.mocky.io/v3/96d02e95-d0be-47e3-88cf-b8f9897ee12c"
+        );
 
-        //ChainLink Code for Verification
+        req._add("path", "0,response");
 
-        Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
-        request.add("get", "https://mocki.io/v1/9471e151-4903-43bb-8bf9-45e98994672b");
-
-        //Set the path {"data":{"id":100}}
-
-        request.add("path", "data,id");
-
-        requestId = sendChainlinkRequestTo(oracle, request, fee);
         Applicants[requestId] = Applicant(
             _name,
             _applicantAddress,
@@ -187,34 +181,51 @@ contract DoctorWeb3 is ChainlinkClient {
             _applicantType
         );
 
-        return requestId;
+        return _sendChainlinkRequest(req, fee);
     }
 
-    function fulfill(bytes32 _requestId, uint256 _verification)
-        public
-        recordChainlinkFulfillment(_requestId)
-    {
-        Applicant memory applicant = Applicants[_requestId];
-        if (_verification == 100) {
-            if (applicant.applicantType == 0) {
-                addAuthorizedDoctor(
-                    applicant.applicantAddress,
-                    applicant.name,
-                    applicant.medicalId
-                );
-            } else {
-                addAuthorizedHospital(
-                    applicant.applicantAddress,
-                    applicant.name,
-                    applicant.medicalId
-                );
-            }
-            emit AuthorizationResult(applicant.applicantAddress, applicant.medicalId, true);
-        } else {
-            emit AuthorizationResult(applicant.applicantAddress, applicant.medicalId, false);
+    function fulfill(
+        bytes32 _requestId,
+        bool _response
+    ) public recordChainlinkFulfillment(_requestId) {
+        res = _response;
+        Applicant memory applicant = Applicants[requestId];
+        if (applicant.applicantType == 0) {
+            addAuthorizedDoctor(
+                applicant.applicantAddress,
+                applicant.name,
+                applicant.medicalId
+            );
+        } else if (applicant.applicantType == 1) {
+            addAuthorizedHospital(
+                applicant.applicantAddress,
+                applicant.name,
+                applicant.medicalId
+            );
         }
+        requestId = requestId + 1;
+        emit AuthorizationResult(
+            applicant.applicantAddress,
+            applicant.medicalId,
+            true
+        );
         medicalIdUsed[applicant.medicalId] = true;
-    } */
+    }
+
+    function getRes() public view returns (bool) {
+        return res;
+    }
+
+    /**
+     * Allow withdraw of Link tokens from the contract
+     */
+    function withdrawLink() public onlyOwner {
+        LinkTokenInterface link = LinkTokenInterface(_chainlinkTokenAddress());
+        require(
+            link.transfer(msg.sender, link.balanceOf(address(this))),
+            "Unable to transfer"
+        );
+    }
 
     function ApplyForVerification(
         string memory _name,
@@ -374,10 +385,27 @@ contract DoctorWeb3 is ChainlinkClient {
         );
     }
 
-    /* function shareReportResponse(
-        string memory notes,
-        string memory fileHash
-    ) public pure {
-        return;
-    } */
+    function shareReportResponse(
+        bytes32 _sharedReportId,
+        string memory _response
+    ) public {
+        (string memory _filehash, address _receiver, , ) = getSharedReport(
+            _sharedReportId
+        );
+
+        DoctorHospitalResponse[_filehash].push(
+            dhResponse({
+                sender: msg.sender,
+                receiver: _receiver,
+                response: _response
+            })
+        );
+        emit dhResponseEvent(msg.sender, _receiver, _response, _filehash);
+    }
+
+    function getDHResponse(
+        string memory _filehash
+    ) public view returns (dhResponse[] memory) {
+        return DoctorHospitalResponse[_filehash];
+    }
 }

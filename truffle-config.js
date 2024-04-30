@@ -13,6 +13,17 @@ module.exports = {
 
     // Useful for deploying to a public network.
     // Note: It's important to wrap the provider as a function to ensure truffle uses a new provider every time.
+    testbnb: {
+      provider: () =>
+        new HDWalletProvider(
+          mnemonic,
+          "https://data-seed-prebsc-1-s1.bnbchain.org:8545"
+        ),
+      network_id: 97,
+      confirmations: 1,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+    },
     matic: {
       provider: () =>
         new HDWalletProvider(
@@ -21,7 +32,10 @@ module.exports = {
         ),
       network_id: 80001, // Matic's id
       confirmations: 1, // # of confirmations to wait between deployments. (default: 0)
-      timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
+      networkCheckTimeout: 10000,
+      timeoutBlocks: 200,
+      gas: 1000000,
+      gasPrice: 10000000000,
       skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
     },
     goerli: {

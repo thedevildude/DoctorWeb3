@@ -46,14 +46,9 @@ const ReadReport = () => {
     e.preventDefault();
     const signedMessage = await signer.signMessage(form.notes);
     console.log(signedMessage);
-    const tx = await doctorWeb3.shareReport(
-      reportId,
-      form.recipient,
-      form.notes
-    );
+    const tx = await doctorWeb3.shareReportResponse(reportId, form.notes);
     await tx.wait();
-    alert("Report shared back successfully!");
-    closeModal();
+    alert("Report feedback shared back successfully!");
   };
 
   return (
@@ -146,7 +141,7 @@ const ReadReport = () => {
                 className="block mt-6 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
                 onClick={handleSubmit}
               >
-                Submit
+                Share Feedback
               </button>
             </div>
           </Transition.Child>
