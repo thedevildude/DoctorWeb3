@@ -8,7 +8,7 @@ const ReadReport = () => {
   const [form, setForm] = useState({
     notes: "",
   });
-  const [report, setReport] = useState({});
+  const [report, setReport] = useState(undefined);
   const { isLoading, isConnected, doctorWeb3, signer } = useContextState();
   const navigate = useNavigate();
   const { reportId } = useParams();
@@ -36,6 +36,7 @@ const ReadReport = () => {
         secretMessage: report[3],
         detailedReport,
       });
+      console.log(report);
       console.log(detailedReport);
     };
     fetchData();
@@ -93,27 +94,27 @@ const ReadReport = () => {
               <h2 className="text-xl font-medium">
                 Read Report
                 <span className="ml-5 text-sm p-2 bg-green-400 rounded-md">
-                  {report.detailedReport["category"]}
+                  {report && report.detailedReport["category"]}
                 </span>
               </h2>
               <div className="flex flex-col gap-2">
                 <div className="flex gap-2 mt-5">
                   <p>Patient:</p>
-                  <p>{report.patientAddress}</p>
+                  <p>{report && report.patientAddress}</p>
                 </div>
                 <div className="flex gap-2">
                   <p>Gender:</p>
-                  <p>{report.detailedReport["patientInfo"][4]}</p>
+                  <p>{report && report.detailedReport["patientInfo"][4]}</p>
                 </div>
                 <div className="flex gap-2">
                   <p>Bloodgroup:</p>
-                  <p>{report.detailedReport["patientInfo"][5]}</p>
+                  <p>{report && report.detailedReport["patientInfo"][5]}</p>
                 </div>
                 <div className="flex gap-2 items-center">
                   <p>Secret message:</p>
                   <input
                     type="text"
-                    value={report.secretMessage}
+                    value={report && report.secretMessage}
                     readOnly
                     disabled
                     className="w-full p-2 mt-2 rounded-md border-2 border-gray-200 text-gray-400"
@@ -122,13 +123,15 @@ const ReadReport = () => {
                 <p>
                   File URL:{" "}
                   <a
-                    href={`http://127.0.0.1:8080/ipfs/${report.fileHash}`}
+                    href={`http://127.0.0.1:8080/ipfs/${
+                      report && report.fileHash
+                    }`}
                     className="text-blue-600 hover:text-blue-800"
                   >
-                    {report.fileHash}
+                    {report && report.fileHash}
                   </a>
                 </p>
-                <p>{report[1]}</p>
+                <p>{report && report[1]}</p>
                 <input
                   type="text"
                   placeholder="Enter notes to file"
